@@ -1,0 +1,26 @@
+---
+title: Test Script
+description: Test Script
+sidebar_position: 6
+hide_table_of_contents: false
+
+---
+
+This [Best Practice Test Script](https://cronos.sharepoint.com/:x:/t/flexso/projects/Ef-vj8oY6GVHknAHPKhRUSwBKsq_0AXVdyTHJmMolzg2ew?e=UVer2b) can help you and your customers test the solution.
+
+| Test # | Test Case | Test Steps | Expected Result | Actual Result | Pass/Fail | Author | Comments |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| FMM_01 | Open app | 1. Search for the 'Funding Model   Cockpit' app on your launchpad.      2. Open the app. | The app opens and data is   visible |  *Complete   your actual result here* |  *Indicate   wether the test passed or failed (Does the actual result match with the   expected result?)* | *State your name* | *Add additional comments if   desired* |
+| FMM_02 | Create new funding model | 1. Click 'Create'      2. Enter a name and description for the funding model      3. Complete all header, general, rules and reporting level data (at least   mandatory fields)      4. Click 'Save'      5. Check if funding model appears in the list | The funding model should appear   in the list of all funding models with the correct information |  |  |  |  |
+| FMM_03 | Edit funding model | 1. Select a funding model from   the list      2. Click 'Edit'      4. Update the information      5. Click 'Save'      6. Check if the changed information is saved | The funding model should be   updated with the new information |  |  |  |  |
+| FMM_04 | Delete funding model | 1. Open a funding model by   clicking on it      2. Click 'Delete'      3. Check if the funding model dissapears from the list | The deleted funding model should   dissapear from the list |  |  |  |  |
+| FMM_05 | Add funding categories on funding model | 1. Create a new funding model or   select a funding model from the list      2. Create a new funding category by clicking 'Insert' (under Funding   Conditions)      3. Enter a name for the new funding category      4. Complete all general, ceiling amount, flat rate, personnel and overhead   data      5. Click 'save'      6. Check if the funding category appears in the list | The newly created funding   category should be visible in the list with the correct information |  |  |  |  |
+| FMM_06 | Edit funding categories on funding model | 1. Select a funding model from   the list      2. Open a funding category by clicking on it      3. Click 'Edit'      4. Update the information      5. Click 'save'      6. Check if the changed information is saved | The funding category should be   updated with the new information |  |  |  |  |
+| FMM_07 | Delete funding category on funding model | 1. Open a funding category by   clicking on it      2. Click 'Delete'      3. Check if the funding catagory dissapears from the list | The deleted funding category   should dissapear from the list |  |  |  |  |
+| FMM_08 | Filter funding models | 1. Check if all required filters   are present      2. Check if all filters have the correct label      3. Check if all filters have the correct search helps      4. Check if the filters can be adapted (click 'Adapt filters')      5. Use the filters and check if the correct funding models appear in the   list (fill out value and click 'Go') | Possible to filter on all fields   required by the user |  |  |  |  |
+| FMM_09 | Export funding models to excel | 1. Click 'Export' or 'Export   as…'      2. Open the excel | Excel file with a list of all   funding models |  |  |  |  |
+| FMM_10 | Negative test: saving funding   model with empty required fields | 1. Create or edit a funding   model and leave required fields empty      2. Check if an error message appears upon saving | It should not be possible to   save a funding model with empty required fields |  |  |  |  |
+| FMM_11 | Negative test: saving funding   category on funding model with empty required fields | 1. Create or edit a funding   category on a funding model and leave required fields empty      2. Check if an error message appears upon saving | It should not be possible to   save a funding category on a funding model with empty required fields |  |  |  |  |
+| FMM_12 | Variant management | 1. Create a variant (set   filters, sorting, groups, columns)      2. Click on 'Standard' or another variant that is active      3. Click 'Save As'      4. Provide a name for the variant      5. Optional: make this the default variant by selecting 'Set as Default' or   run all filtering, sorting,... automatically by selecting 'Apply   Automatically'      6. Click 'Save'      7. Open the variant to check if it was correctly saved | The variant should open as it   was configured |  |  |  |  |
+| FMM_13 | Tile | 1. Check if the tile displays   the right KPI | The tile displays the right KPI |  |  |  |  |
+| FMM_NF | Non-functional requirements | 1. When I open the funding model   cockpit, the overview of all funding models is loaded within an acceptable   timeframe      2. When I click on a funding model, it is opened within an accetable   timeframe      2. When I delete a funding model, it is deleted within an acceptable   timeframe |  |  |  |  |  |

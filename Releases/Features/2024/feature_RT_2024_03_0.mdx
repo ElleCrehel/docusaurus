@@ -1,0 +1,53 @@
+---
+sidebar_position: 2
+title: Feature RT 2024.03.0 
+tags:
+  - Feature RT
+  - 2024.03.0
+sidebar_class_name: hidden
+---
+
+### Changed applications for the March 2024 release:
+
+#### Applications:
+
+1. Eligibility maintainer
+2. Forecast
+4. Timesheet 
+5. Timesheet Approval
+
+## 1. Eligibility maintainer
+
+- Performance Improvement: Reduced number of oData calls 
+- Pen Testing: Set up of Postman project
+- Fixes:
+  - It is not possible to add a document with a posting date in the future, past the end date of the version
+  - Changing a category for multiple lines will reset the budget line
+  - Manipulation actions are checked in the backend to see if they are possible/allowed
+  - A document can be added to multiple work packages -> BAdI implementation 
+
+## 2. Forecast
+
+- 1 App became 3 Apps as selecting an internal/external forecast in the Forecast App will navigate you to the corresponding App.
+- Prior years saved per year in a forecast version
+- Fixes:
+  - Added forecast line becomes available as possible budget line as soon as the forecast version is final
+  - Manipulation actions are checked in the backend to see if they are possible/allowed
+
+## 3. Timesheet
+
+- Feedback shown from the backend regarding errors & warnings
+- Determination of the employee number was adjusted
+- Added BAdI's for customer checks
+- Mobile:
+  - Fixed scrolling
+  - Entering hours on the correct date
+  - Fixed issue with deleting entries
+  - Fixed coloring on calendar
+- Works now in stand-alone mode (without Workzone/FLP)
+
+## 4. Timesheet Approval
+
+- Added BAdI for customer approval flow and checks
+- Allow user to approve or reject hours and provide comment
+- Fixed navigation issue

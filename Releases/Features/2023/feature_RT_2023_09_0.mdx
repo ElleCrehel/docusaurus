@@ -1,0 +1,62 @@
+---
+sidebar_position: 8
+title: Feature RT 2023.09.0
+tags:
+  - Feature RT
+  - 2023.09.0
+sidebar_class_name: hidden
+---
+
+Changed applications for the September 2023 release:
+
+Applications:
+
+1. Item cockpit
+2. Item app
+3. Eligibility maintainer
+4. Form cockpit
+5. Milestone maintainer
+
+General:
+
+6. Changed app start context
+7. Improved back navigation
+8. Implemented new 'Related Apps' button
+
+## 1. Item cockpit
+
+- Changed navigation towards other apps since all apps use routing parameters now  
+    > _**Implementation teams**: please validate this in your applications !_
+- Actions cleared and new relevant data shown when other line is selected
+
+## 2. Item app
+
+- Disabled automatic opening pop-over 
+
+## 3. Eligibility maintainer
+
+- Versions can now be deleted even when no related items are found
+- Unique ID's given to all UI components to prevent duplicate ID errors
+- Change status of eligibility version
+
+## 4. Form cockpit
+
+- For the initial form (the one used by the call cockpit) you can not choose a role
+
+## 5. Milestone maintainer
+
+- Adjusted value list for milestone project dates
+
+## 6. Changed app start context 
+
+- Usage of routing parameters provided via the manifest routes
+
+## 7. Improved back navigation
+
+- Navigating forward and backwards, now takes into account the navigation stack
+- Navigating towards another business context (e.g.: you are checking a funder out in project funding and click on another funder), 
+  your navigation stack stays the same and there will not be crated extra entries created in the navigation stack.
+
+## 8. Implemented new 'Related Apps' button
+
+- Navigation possible within the context of your item towards eligibility, team & workpackage maintainer and project funding

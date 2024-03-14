@@ -1,0 +1,58 @@
+---
+sidebar_position: 2
+sidebar_label: Develop application
+title: Develop an application
+description: Documentation on how to develop a UI5 application for HER-apps
+tags: [SAPUI5, Development, Application]
+hide_table_of_contents: true
+---
+
+# General
+
+When developing a custom application for HER-apps some guidelines need to be followed. This to make sure all applications have the same look and feel.
+Next to that it is also important that any developer can understand the code and make changes to it when needed.
+
+To develop a new application an generator exists. The generator can be found [here](https://flexso.gitlab.host/flexso/flexso/flexso-research-management-package/appgenerator) and a quick how to is provided in the readme of the repo.
+This generator will provide you with a **FRMP Application**, and your new application will be up an running in no time!
+
+# Development guidelines
+
+Always keep the fiori guidelines in mind when developping an application.
+
+## 1. Master Page
+
+When developping a master detail app, use a Smart Table, preferably based on SADL service.
+
+## 2. Detail Page
+
+Use Simple Form to format the layout of the different fields.
+
+## 3. Use features
+
+Features are fetched from the featureflags library and loaded into the "appView" model in Component.ts.
+
+Use features in xml:
+
+```xml
+<YourControl visible="{= ${appView>/features/<<featureKey>>} ? !!${appView>/features/<<featureKey>>/featureCheck} : false}" />
+```
+
+Use features in a controller:
+
+```typescript
+const features = this.getFeatures();
+```
+
+# Deploy information
+
+If you want to perform a FULL deploy of this application (with xsuaa, destination, ...) run the following npm script followed by the environment (dev or demo):
+
+```bash
+npm run deploy:{environment}
+```
+
+If the application was already deployed, for example by the FRMP package deployer, and you want to deploy only an update of the app its static content, run the following npm script followed by the environment (dev or demo):
+
+```bash
+npm run update:{environment}
+```

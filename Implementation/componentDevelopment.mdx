@@ -1,0 +1,128 @@
+---
+sidebar_position: 3
+sidebar_label: Develop component
+title: Develop an component
+description: Documentation on how to develop a UI5 component for HER-apps
+tags: [SAPUI5, Development, Component]
+hide_table_of_contents: true
+---
+
+# General
+
+When developing a custom component for HER-apps some guidelines need to be followed. This to make sure all components have the same look and feel.
+Next to that it is also important that any developer can understand the code and make changes to it when needed.
+
+A component is a UI5 application used in the Item app or Form configurator, because of this strict guidelines have to be followed to make sure all data is passed correctly from and to the application in which the component is opend.
+
+To develop a new component a generator exists. The generator can be found [here](https://flexso.gitlab.host/flexso/flexso/flexso-research-management-package/appgenerator) and a quick how to is provided in the readme of the repo.
+This generator will provide you with a **FRMP Component**, and your new component will be up an running in no time!
+
+# Development guidelines
+
+When developing a component certain data needs to bes exchanged between the component and the Item App / Form configurator. This data has to be fetched and send in a specific format. When you take a look at the code, the fetching and sending of data is already in place.
+
+Bellow a quick step by step manual is available to easily understand how a component works.
+
+## 1. Component configuration
+
+Component configuration makes it possible to change what will be displayed in the Item App from the Form Configurator. For example, to display a long text you can configure what text should be displayed in the Form Configurator.
+If the content of your component cannot be configured please continue to step 2 of this manual.
+
+[![](https://mermaid.ink/img/pako:eNplUD1vgzAQ_Sunm1opoTtDJQqJlCFT26U4wwkfiRXsQ45pVBH-e22Q6FBPvqf3cfdGbEQz5th2cm8u5AN8VMpBfEW9F2-hFNea8-ApiD_BdguF1tCsoBEXwVconz4PWSm2F8cuPC8Wb_UhsIWi76Myg50L7GElQUWBIEvihV7OTtUI0zJXaX6kLR6wq5dF4Nvw_SXmBy9dx_60UjOYw5Lfvj7SLWX9JyuHG7TsLRkdzx6TXGG4sGWFefxq8leFyk2RR0OQ9x_XYB78wBscek2BK0NnTxbzlrpbRHtyXyJ_M2sTuzouvc71Tr_EFXTK?type=png)](https://mermaid.live/edit#pako:eNplUD1vgzAQ_Sunm1opoTtDJQqJlCFT26U4wwkfiRXsQ45pVBH-e22Q6FBPvqf3cfdGbEQz5th2cm8u5AN8VMpBfEW9F2-hFNea8-ApiD_BdguF1tCsoBEXwVconz4PWSm2F8cuPC8Wb_UhsIWi76Myg50L7GElQUWBIEvihV7OTtUI0zJXaX6kLR6wq5dF4Nvw_SXmBy9dx_60UjOYw5Lfvj7SLWX9JyuHG7TsLRkdzx6TXGG4sGWFefxq8leFyk2RR0OQ9x_XYB78wBscek2BK0NnTxbzlrpbRHtyXyJ_M2sTuzouvc71Tr_EFXTK)
+
+### Config.controller.ts
+
+In the config controller we handle the configuration logic of a component. Fetching and writing data to the backend is handled by the Form Configurator and should not be implemented by the component. In the _onRouteMatched_ function a constant parameter _path_ is available. This parameter contains the path to the correct FieldGroup in the Form Configurator where the component is saved. The parameter _fieldGroupPath_ is used to write data to the _formsState_.
+
+    const fieldGroupPath = `formsState>${path}/fieldGroup/config/`;
+    // formsState>${path}/fieldGroup/config/objectid => key: objectid, value: `entered by user`
+
+Add the key of the field behind the last slash to store it in the formsState.
+An example is provided.
+
+### Config.view.xml
+
+Standard a MessagePage is implemented to indicate no config is available. Remove the MessagePage and uncomment the Page tags to implement the config view.
+
+## 2. Component implementation
+
+To use your component in the Item App, implementation of the _Master.view.xml_ and _Master.controller.ts_ is needed.
+
+[![](https://mermaid.ink/img/pako:eNpdUEFqwzAQ_MqiUwuxe_eh4NoJ5JBT20utHBZrnYhYWqOsG4rx3yvZ4EJ10g4zO7MzqZYNqUJpr33X86O9YhD4qLWH-MrmwMFBxb6zlzGgcDhDlkNpDLQbaNlDnr1C9fR5zCt2A3vy8ryueGuOQg7KYYjKDPZeKMBGghoFIx7FK71ahnqCeZ3rZLeESA77Zo0C35YeLzGBBO57CueNnMFil5YcmhPek9t_stopR8GhNfHwKUm1kis50qqIX4PhpmMhc-ThKPz-41tVSBhpp8bBoFBt8RLQqaLD_h7RAf0X899MxsamTmuzS8HzLy3MdGw?type=png)](https://mermaid.live/edit#pako:eNpdUEFqwzAQ_MqiUwuxe_eh4NoJ5JBT20utHBZrnYhYWqOsG4rx3yvZ4EJ10g4zO7MzqZYNqUJpr33X86O9YhD4qLWH-MrmwMFBxb6zlzGgcDhDlkNpDLQbaNlDnr1C9fR5zCt2A3vy8ryueGuOQg7KYYjKDPZeKMBGghoFIx7FK71ahnqCeZ3rZLeESA77Zo0C35YeLzGBBO57CueNnMFil5YcmhPek9t_stopR8GhNfHwKUm1kis50qqIX4PhpmMhc-ThKPz-41tVSBhpp8bBoFBt8RLQqaLD_h7RAf0X899MxsamTmuzS8HzLy3MdGw)
+
+### Master.controller.ts
+
+In the Master controller the logic of fetching and saving data to the backend is implemented. The service used to store the data is specific for the component. This means the backend logic is not implemented or handled by the Item App.
+
+In the _fetchData_ function, the logic of fetching the data should be implemented. If the component is configurable, the global parameter _config_ contains the configuration. This configuration can be used to fetch the correct data. Data fetching should be implemented inside the:
+
+    if (itemId) {
+    	//Implement the data fetching logic here
+    }
+
+statement.
+
+To save the data from the component, the _onSave_ function should return an array of Promises containing all the odata calls. This saving logic is executed when the users save the item from the Item App.
+
+If the component can be configured as mandatory the developer has to add validation in the component itself. Error message from the component has to be added to the _componentRequired_ array of the _itemState_ from the Item app. If all required fields are filled, message should be removed from this array.
+
+When 'Save to next phase' is clicked by the user, this array will be checked if all mandatory fields are completed.
+
+Format of the error object is as followed:
+
+```typescript
+{
+  responseText: string; //message that will be displayed in the Item app
+  // extra parameters should be added to find the correct index when deleting the entry
+}
+
+//example of longtextmaintainer check
+private onCheckRequired() {
+	const itemState = (this.getOwnerComponent()
+            .getModel("itemState") as JSONModel)
+            .getData(),
+		longtextData = (this.getModel("longTextModel") as JSONModel)
+            .getData() as ILongTextModel;
+
+	if (!longtextData.text && (/true/).test(longtextData.mandatory)) {
+		(itemState.componentRequired as requiredError[]).push({
+			responseText: "Text is required for long text component",
+			objectid: longtextData.objectId,
+			textid: longtextData.textId
+		});
+		return;
+	}
+	//If no error messages in array, exit function
+	if (itemState.componentRequired.length === 0) return;
+
+	//FIND the correct error message
+	const index = (itemState.componentRequired as requiredError[])
+        .indexOf((itemState.componentRequired as requiredError[])
+        .find((error: requiredError) =>
+            error.objectid === longtextData.objectId &&
+            error.textid === longtextData.textId
+            )
+        );
+
+	//Only remove element from array when index is found
+	if (index != -1) (itemState.componentRequired as requiredError[]).splice(index, 1);
+}
+```
+
+### Master.view.xml
+
+Master view contains the view implementation of the component.
+
+# Deploy information
+
+If you want to perform a FULL deploy of this application (with xsuaa, destination, ...) run the following npm script followed by the environment (dev or demo):
+
+```bash
+npm run deploy:{environment}
+```
+
+If the application was already deployed, for example by the FRMP package deployer, and you want to deploy only an update of the app its static content, run the following npm script followed by the environment (dev or demo):
+
+```bash
+npm run update:{environment}
+```

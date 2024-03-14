@@ -1,0 +1,150 @@
+---
+sidebar_position: 4
+sidebar_label: Extensibility
+title: Extensibility
+description: Documentation on how to extend the workpackage maintainer
+tags: [Extensibility framework, Role Setup, Exmple controls]
+hide_table_of_contents: true
+---
+
+### What is extensibility
+
+When an application implements the extensibility framework adding new fields, changing field labels, creating groups, … can easily be done directly in the UI. All of this without the need of a developer (on the UI side).
+
+Only basic fields are provided from the package. Extra development will have to be carried out to provide extra fields if needed.
+
+<br />
+
+### Setting up key user role
+
+To be able to adapt the UI, a user needs the correct key user roles.
+
+<br />
+
+> **_Note: this role should only be added to key users._**
+
+<br />
+
+If no key user Role Collection exists in the Subaccount, follow below steps to setup this Role Collection.
+
+<br />
+
+In the btp subaccount create a new Role Collection:
+
+Role Collection --> click "+" on top right --> provide a "Name" and "Description"
+
+```
+ - Name: Portal_Key_User
+ - Description: Enables access to key user extensibility
+```
+
+<br />
+
+Open the newly created Role Collection.
+
+<br />
+
+Click "Edit" on the top right --> Roles section click the value help icon in the "Role Name" input field --> Enter "ui5-flexibility-keyuser" in the "Application Identifier" filter field  
+--> Select all elements in the "Roles" table (AdminFlexKeyUser, FlexKeyUser, FlexPublicViewEditor)
+--> click "Add" on the bottom left of the screen -> click "Save" the Role Collection
+
+<br />
+
+The correct roles are added to the Role Collection, you can now add users to the role collection.
+
+<br />
+
+## Technical Setup
+
+To add extra fields (client specific) the consumption view of the application should be extended. In this extension view you can add the extra fields that are needed. The added fields will automatically be added to the gateway service, and also be available in the application itself.
+
+<br />
+
+### How to extend a view?
+
+To extend a CDS view in eclipse create new Data Definition and complete following fields:
+
+```
+ - Project
+ - Package
+ - Name
+ - Description
+```
+
+--> Click Next --> Select "Extend View" --> Finish.
+
+<br />
+
+A new extension view is created. In this view you can define the custom fields that should be available in the application.
+
+<br />
+
+### UI5 control examples
+
+1. Input field
+
+```
+	@EndUserText.label: 'Test Input'
+	'' as TestInput,
+```
+
+<br />
+
+2. Input field with drop down list
+   For the moment only value help CDS entities that are already available in the service can be used as value help
+
+```
+	@EndUserText.label: 'Test Valuehelp'
+    @Consumption.valueHelpDefinition: [{
+      entity : {
+          name: 'Z_C_EMPLOYEE_VH',
+          element: 'fullName'
+      }
+    }]
+    '' as TestInputDropDown
+```
+
+In VH cds add:
+
+```
+	@ObjectModel.resultSet.sizeCategory: #XS
+	define view Z_C_EMPLOYEE_VH as select from ...
+```
+
+> **_Note: Select -> 2 - 12 entries, Combobox -> 13 - 200 entries, Valuehelp -> 200+ entries._**
+
+<br />
+
+3. Input field with value help
+   For the moment only value help CDS entities that are already available in the service can be used as value help
+
+```
+	@EndUserText.label: 'Test Valuehelp'
+    @Consumption.valueHelpDefinition: [{
+      entity : {
+          name: 'Z_C_EMPLOYEE_VH',
+          element: 'fullName'
+      }
+    }]
+    '' as TestInputValuehelp
+```
+
+<br />
+
+4. Boolean field
+
+```
+	@EndUserText.label: 'Test Boolean'
+	//Indicate if field is manadatory
+	@ObjectModel.mandatory: true
+	cast('' as boole_d) as TestBoolean
+```
+
+<br />
+
+5. Date field
+
+```
+	@EndUserText.label: 'Test Datepicker'
+	$session.system_date as TestDatePicker
+```
